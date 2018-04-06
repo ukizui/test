@@ -88,9 +88,8 @@ if ($jid == '01') {
 //print_r($array[3]);
 //print_r($array[4]);exit;
 //$arrayの0から5で１レースなので,6で割ったときのあまり
-
-foreach ($array as $a => $speed) {
-    $i = 0;
+$i = 0; //max71
+foreach ($array as $speed) {
     $raceNumberVar = $i / 6; // 1以下だったら1R,　1以上2以下だったら2R...
     $res = $i % 6; // 0だったら1枠...
     switch (floor($raceNumberVar)){
@@ -99,40 +98,39 @@ foreach ($array as $a => $speed) {
     }
     switch ($res) {
         case 0: // waku1
-            echo($array[$i][$i+1]."\n");
-            $waku1 = $speed[$i+1];
-            //echo($i.$speed[$i+1]."\n");
+            $waku1_1 = $array[$i][1];// 区分1
             break;
 
         case 1: // waku2
-            $waku2 = $speed[$i+1];
+            $waku2_1 = $array[$i][1];
             break;
 
-        case 2: // waku2
-            $waku2 = $speed[$i+1];
+        case 2: // waku3
+            $waku3_1 = $array[$i][1];
             break;
 
-        case 3: // waku2
-            $waku2 = $speed[$i+1];
+        case 3: // waku4
+            $waku4_1 = $array[$i][1];
             break;
 
-        case 4: // waku2
-            $waku2 = $speed[$i+1];
+        case 4: // waku5
+            $waku5_1 = $array[$i][1];
             break;
 
-        case 5: // waku2
-            $waku2 = $speed[$i+1];
-            break;
-
-        case 6: // waku2
-            $waku2 = $speed[$i+1];
+        case 5: // waku6
+            $waku6_1 = $array[$i][1];
             break;
 
     }
+    echo $i."\n";
+    echo $waku1_1."\n";
+    echo $waku2_1."\n";
+    echo $waku3_1."\n";
+    echo $waku4_1."\n";
+    echo $waku5_1."\n";
+    echo $waku6_1."\n";
     $i++;
 }
-//print_r($array2);
-//print_r($segment);
 
 //$contents = file_get_contents('tenji/20180301_01_tenji.csv');
 
