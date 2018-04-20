@@ -18,7 +18,7 @@ function readCsv($date, $jid) {
         '01' => [0.06, 1.9 , 0.14 , 1.95, 1.9 , 2.0, 0.15],
         '04' => [0.08, 1.9 , 0.13 , 1.95, 1.9 , 2.0, 0.15],
         '06' => [0.08, 2.0 , 0.14 , 2.00, 1.9 , 2.0, 0.15],
-        '10' => [0.06, 1.9 , 0.14 , 1.95, 1.9 , 2.0, 0.15],
+        '10' => [0.08, 2.0 , 0.12 , 2.00, 2.0 , 2.0, 0.15],
         '17' => [0.08, 1.9 , 0.13 , 1.95, 1.9 , 2.0, 0.15],
         '20' => [0.16, 1.93, 0.12 , 1.95, 1.93, 0.15],
         '21' => [0.12, 1.95, 0.135, 1.95, 2.0 , 2.0, 0.15],
@@ -84,9 +84,10 @@ function readCsv($date, $jid) {
 
 $array = readCsv($date, $jid);
 
-//var_dump($array);
 
-// 順位データ作成
+#var_dump($array);
+#exit;
+// ソートされた順位データ作成
 $jun = [];
 foreach ( $array as $race_num => $race_data ) {
 	// 選手の区分ごとのデータを取り込み
@@ -108,4 +109,41 @@ foreach ( $array as $race_num => $race_data ) {
 	arsort($jun[ $race_num ][7]);
 }
 
-var_dump($jun);
+#var_dump($jun);
+
+foreach( $jun as $race_num => $race_data ) {
+	foreach ( $race_data as $div => $speed_list) {
+		// 順位の判定
+		$loop = 0;
+		$last_speed = 0;
+		$rank = 1;
+		foreach($speed_list as $waku => $speed) {
+			if ( $last_speed > $speed ) {
+				$rank++;
+			}
+
+			if ( $rank == 1 ) {
+				$array[ $race_num ][ $waku ]['div_color'][$div] = 'red';
+			} else {
+				$array[ $race_num ][ $waku ]['div_color'][$div] = 'green';
+			}
+
+			$last_speed = $speed;
+			$loop++;
+			if ( $loop  >= 3 ) break;
+		}
+	}
+}
+
+var_dump($array);exit;
+
+
+// 表示用のデータを作る
+$disp_data = [];
+#foreach ( $array as $race_num => $race_data ) {
+#	foreach ( $race_data as $waku => $sensyu ) {
+#		$disp_data[ $race_num ][ $waku ] = [
+#			'name'     => $sensyu[0],
+#		];
+#	}
+#}
