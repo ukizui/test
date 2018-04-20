@@ -16,7 +16,7 @@ class Tenji {
         #'05' => [], // 多摩川
         '06' => [ // 浜名湖(2018-01-13～)
             'format' => 'http://www.boatrace-hamanako.jp/modules/yosou/cyokuzen.php?page=cyokuzen&button=3&day=%s&race=%d',
-            'regex'  => "class='col1 imp-num\d+ waku'>(\d+)</td>.*?<li class='com-toban'>(\d+)</li>.*?<li class='com-rname'>(\w+)</li>.*?<td class='col-data'>.*?</td>.*?<td class='col-data'>.*?</td>.*?<td class='col-data'>(\d*?)</td>.*?<td class='col-data'>(.*?)</td>.*?<td class='col-data'>([+-]?[0-9]+[.]?[0-9]|.*?)</td>.*?<td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td>.*?<td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td><td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td><td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td>.*?<td class='col-data' rowspan='2'>.*?</td>",
+            'regex'  => "class='col1 imp-num\d+ waku'>(\d+)</td>.*?<li class='com-toban'>(\d+)</li>.*?<td class='col-data'>.*?</td>.*?<td class='col-data'>.*?</td>.*?<td class='col-data'>(\d*?)</td>.*?<td class='col-data'>(.*?)</td>.*?<td class='col-data'>([+-]?[0-9]+[.]?[0-9]|.*?)</td>.*?<td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td>.*?<td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td><td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td><td class='col-data.color-rank\d*?' rowspan='2'>([0-9]+[.]?[0-9]+|.*?)</td>.*?<td class='col-data' rowspan='2'>.*?</td>",
         ],
         #'07' => [], // 蒲郡
         #'08' => [], // 常滑
@@ -140,7 +140,6 @@ class Tenji {
                 else {
                     $arr_waku          = []; // 枠番
                     $arr_toban         = []; // 登番
-                    $arr_rname         = []; // 選手名
                     $arr_mno           = []; // モーター番号
                     $arr_m2ren         = []; // モーター2連率
                     $arr_tilt          = []; // チルト
@@ -166,14 +165,13 @@ class Tenji {
                     case 6:
                         $arr_waku          = $matches[1];
                         $arr_toban         = $matches[2];
-                        $arr_rname         = $matches[3]
-                        $arr_mno           = $matches[4];
-                        $arr_m2ren         = $matches[5];
-                        $arr_tilt          = $matches[6];
-                        $arr_time_tenji    = $matches[7];
-                        $arr_time_round    = $matches[8];
-                        $arr_time_corner   = $matches[9];
-                        $arr_time_straight = $matches[10];
+                        $arr_mno           = $matches[3];
+                        $arr_m2ren         = $matches[4];
+                        $arr_tilt          = $matches[5];
+                        $arr_time_tenji    = $matches[6];
+                        $arr_time_round    = $matches[7];
+                        $arr_time_corner   = $matches[8];
+                        $arr_time_straight = $matches[9];
                         break;
 
                     case 10:
@@ -242,7 +240,6 @@ class Tenji {
                             $rno,
                             $waku,
                             isset($arr_toban[$key]        ) ? trim($arr_toban[$key])         : '',
-                            isset($arr_rname[$key]        ) ? trim($arr_rname[$key])         : '',
                             isset($arr_mno[$key]          ) ? trim($arr_mno[$key])           : '',
                             isset($arr_m2ren[$key]        ) ? trim($arr_m2ren[$key])         : '',
                             isset($arr_tilt[$key]         ) ? trim($arr_tilt[$key])          : '',
